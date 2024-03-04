@@ -13,6 +13,7 @@ require("dotenv").config()
 const express = require('express')
 const app = express()
 const Sequelize = require('sequelize');
+const PORT = process.env.PORT || 3000
 
 
 app.use(express.json())
@@ -46,20 +47,24 @@ sequelize.sync()
     console.error('Error creating database and tables:', err);
   });
 
-app.get('/', async (req, res) => {
-    res.send("Hii welcome")
+app.get('/api', async (req, res) => {
+    res.send({title:"welcome"})
   });
 
   app.post('/api/users', async (req, res) => {
     try {
       const { email } = req.body;
       const newUser = await User.create({ email });
-      res.status(201).json(newUser);
+      res.status(200).json({title:newUser});
     } catch (error) {
       console.error('Error creating user:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+  // app.get('/get', async (req, res) => {
+  //   res.send("Hii welcome")
+  // });
 
 // app.get("/api/retreive_data",async (req,res)=>{
 //     User.getCollection("user").createIndex({ "email": 1 }, { "name": "email_1", "unique": true })
@@ -78,4 +83,4 @@ app.get('/', async (req, res) => {
 // });
   
 
-app.listen(3000,()=>`server is running 3000`)
+app.listen(PORT,()=>`server is running ${PORT}`)
