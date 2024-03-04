@@ -17,7 +17,7 @@ const Sequelize = require('sequelize');
 
 app.use(express.json())
 
-const sequelize = new Sequelize(process.env.DATABASE, process.env.DB_USERNAME, process.env.PASSWORD, {
+const sequelize = new Sequelize(process.env.DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres'
 });
