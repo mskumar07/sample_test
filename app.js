@@ -46,6 +46,9 @@ sequelize.sync()
     console.error('Error creating database and tables:', err);
   });
 
+app.get('/', async (req, res) => {
+    res.send("Hii welcome")
+  });
 
   app.post('/api/users', async (req, res) => {
     try {
